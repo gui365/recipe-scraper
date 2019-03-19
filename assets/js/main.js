@@ -1,3 +1,8 @@
-document.getElementById("get-recipe").addEventListener("click", function(){
-  document.getElementById("demo").innerHTML = "Hello World";
-});
+window.onload = function() {
+  document.getElementById("get-recipe").addEventListener("click", function(){
+    event.preventDefault();
+    let link = document.getElementById("recipe-link").value;
+    console.log(link);
+    
+  });
+}
