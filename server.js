@@ -19,7 +19,7 @@ app.listen(port, () => {
 });
 
 // Set up static files
-app.use(express.static(path.join(__dirname, "/assets")));
+app.use(express.static(path.join(__dirname, "/public")));
 
 // Set up HTML routes
 app.get("/", function(req, res) {
@@ -44,15 +44,14 @@ app.post("/recipe", function(req, res) {
     let intro = $(".topnote").children().first().text().trim();
     
     let ingredients = [];
-    $(".recipe-ingredients").each(function(i, ingredient) {
-      // console.log($(ingredient).children().first().text().trim());
-      let ing;
-      $(ingredient).each(function(j, pieceOfInfo) {
-        ing += $(pieceOfInfo).text().replace(/[\n\t\r]/g,"") + " ";
-      })
+    $(".recipe-ingredients").children().each(function(i, ingredient) {
+      let ing = "";
+      ing += $(ingredient).find(".quantity").text().replace(/[\s\n\t\r]/g,"") + " ";
+      ing += $(ingredient).find(".ingredient-name").text().replace(/\s\s+/g, "");
+      console.log(ing);
       ingredients.push(ing);
     })
-    console.log(ingredients.length);
     
+
   });
 });
