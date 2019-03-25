@@ -1,5 +1,6 @@
 const axios = require("axios"),
-      cheerio = require("cheerio");
+      cheerio = require("cheerio"),
+      fs = require("fs");
 
 const apiRoutes = {
   getRecipe: function(req, res) {
@@ -33,7 +34,7 @@ const apiRoutes = {
         preparation.push($(step).text());
       })
       
-      res.json({ 
+      const recipe = { 
         pictureUrl,
         title,
         author,
@@ -42,9 +43,19 @@ const apiRoutes = {
         intro,
         ingredients,
         preparation
-      });
+      }
 
-    });
+      res.json(recipe);
+      
+      // Create a mock JSON file to work on looks from main.js file without having
+      // to call axios every time
+      // fs.writeFile("recipe.json", JSON.stringify(recipe), function(error) {
+      //   if (error) console.log(error);
+      //   console.log("Succesfully created recipe JSON file");
+      // });
+      
+    })
+    .catch(err => console.log(err));
   }
 };
 

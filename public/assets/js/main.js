@@ -21,6 +21,8 @@ window.onload = function() {
     fetch("/recipe", params)
       .then(data => data.json())
       .then(newData => {
+        console.log(newData);
+        
         // Grab the content div and empty it
         const contentDiv = document.getElementById("content");
         contentDiv.innerHTML = "";
@@ -30,14 +32,9 @@ window.onload = function() {
         author.innerHTML = newData.author;
         contentDiv.appendChild(author);
         
-        // const title = document.createElement("p")
-        // const pictureUrl = document.createElement("img")
-        // const author = document.createElement("p")
-        // const recipeYield = document.createElement("p")
-        // const recipeTime = document.createElement("p")
-        // const intro = document.createElement("p")
-        // const ingredients = document.createElement("p")
-        // const preparation = document.createElement("p")
+        const intro = document.createElement("p");
+        intro.innerHTML = newData.intro;
+        contentDiv.appendChild(intro);
 
       })
       .catch(error => console.log(error));
